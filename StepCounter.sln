@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepCounter.Api", "StepCounter.Api\StepCounter.Api.csproj", "{5E15D3D1-DF3B-4C7E-8B8A-19BFBF5ADCBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepCounter.Core", "StepCounter.Core\StepCounter.Core.csproj", "{E7AF164B-2A5B-4F7F-8B1E-65C90C3E320F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StepCounter.Infrastructure", "StepCounter.Infrastructure\StepCounter.Infrastructure.csproj", "{FDAB4E03-A4D6-4DF7-96DA-1B9C6FFF7467}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E15D3D1-DF3B-4C7E-8B8A-19BFBF5ADCBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E15D3D1-DF3B-4C7E-8B8A-19BFBF5ADCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E15D3D1-DF3B-4C7E-8B8A-19BFBF5ADCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E15D3D1-DF3B-4C7E-8B8A-19BFBF5ADCBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7AF164B-2A5B-4F7F-8B1E-65C90C3E320F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7AF164B-2A5B-4F7F-8B1E-65C90C3E320F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7AF164B-2A5B-4F7F-8B1E-65C90C3E320F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7AF164B-2A5B-4F7F-8B1E-65C90C3E320F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDAB4E03-A4D6-4DF7-96DA-1B9C6FFF7467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDAB4E03-A4D6-4DF7-96DA-1B9C6FFF7467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDAB4E03-A4D6-4DF7-96DA-1B9C6FFF7467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDAB4E03-A4D6-4DF7-96DA-1B9C6FFF7467}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
