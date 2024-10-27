@@ -7,6 +7,8 @@ public static class GeneralServiceExtensions
 {
     public static void AddGeneralServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddSingleton<ICounterService, CounterService>();
+        builder.Services.AddScoped<ICounterService, CounterService>();
+        builder.Services.AddScoped<ITeamService, TeamService>();
+        builder.Services.AddScoped<IGlobalScoreService, GlobalScoreService>();
     }
 }

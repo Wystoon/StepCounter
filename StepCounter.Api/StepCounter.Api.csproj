@@ -21,8 +21,4 @@
       <ProjectReference Include="..\StepCounter.Infrastructure\StepCounter.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Validation\" />
-    </ItemGroup>
-
 </Project>
