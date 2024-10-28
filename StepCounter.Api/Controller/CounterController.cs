@@ -16,7 +16,7 @@ public class CounterController(ICounterService counterService) : ControllerBase
     {
         var counter = await counterService.CreateCounterAsync();
 
-        return Created(new Uri($"counter/{counter.Id.ToString()}"), counter);
+        return Created(new Uri($"{Request.Scheme}://{Request.Host}/v1/counter/{counter.Id}"), counter);
     }
 
     [HttpPut("{counterId:guid}")]

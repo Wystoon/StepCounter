@@ -5,12 +5,17 @@ using StepCounter.Core.Model.Team;
 
 namespace StepCounter.Infrastructure.PersistenceContext;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public class AppDbContext : DbContext
 {
     public DbSet<Counter> Counters { get; set; }
     public DbSet<Team> Teams { get; set; }
     
     public DbSet<GlobalScore> GlobalScores { get; set; }
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+        
+    }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

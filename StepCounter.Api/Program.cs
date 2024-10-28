@@ -8,9 +8,6 @@ builder.AddGeneralServices();
 builder.AddApiLayer();
 builder.AddInfrastructureLayer();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("DataSource=:memory:"));
-
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
@@ -33,6 +30,7 @@ else
     app.UseExceptionHandler("/error");
 }
 
+app.MapControllers();
 app.UseHttpsRedirection();
 app.UseSwaggerUiWithVersioning();
 
