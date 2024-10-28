@@ -8,16 +8,25 @@ public class CounterService(ICounterRepository counterRepository, IGlobalScoreRe
     : ICounterService
 {
     public Task<Counter> CreateCounterAsync()
-        => counterRepository.AddCounterAsync(new(Guid.NewGuid(), 0));
+        => counterRepository.CreateCounterAsync(new(Guid.NewGuid(), 0));
 
-    public async Task<Counter> UpdateCounterAsync(Guid counterId, UpdateCounterRequest request)
+    public async Task<Counter> GetCounterAsync(Guid counterId)
+        => await TryGetCounterAsync(counterId);
+
+    public async Task<Counter> UpdateCounterAsync(
+        Guid counterId,
+        UpdateCounterRequest request,
+        bool updateGlobalCounter)
     {
         var existingCounter = await TryGetCounterAsync(counterId);
-        var updatedCounter = await UpdateCounterAsync(existingCounter, request);
+        var updatedCounter = await UpdateIndicatedCounterAsync(existingCounter, request);
 
         await TryUpdateTeamCounter(existingCounter, request);
 
-        await UpdateGlobalCounter(request);
+        if (updateGlobalCounter)
+        {
+            await UpdateGlobalCounter(request);
+        }
 
         return updatedCounter;
     }
@@ -31,10 +40,10 @@ public class CounterService(ICounterRepository counterRepository, IGlobalScoreRe
         var teamCounter = await counterRepository.GetTeamCounter(existingCounter.Id);
 
         if (teamCounter is not null)
-            await UpdateCounterAsync(teamCounter, request);
+            await UpdateIndicatedCounterAsync(teamCounter, request);
     }
 
-    private async Task<Counter> UpdateCounterAsync(Counter counter, UpdateCounterRequest request)
+    private async Task<Counter> UpdateIndicatedCounterAsync(Counter counter, UpdateCounterRequest request)
         => await counterRepository.UpdateCounterAsync(counter with
         {
             Id = counter.Id,
@@ -46,6 +55,6 @@ public class CounterService(ICounterRepository counterRepository, IGlobalScoreRe
         var globalScore = await globalScoreRepository.GetGlobalScoreAsync();
         var globalStepCounter = await TryGetCounterAsync(globalScore.CounterId);
 
-        await UpdateCounterAsync(globalStepCounter, request);
+        await UpdateIndicatedCounterAsync(globalStepCounter, request);
     }
 }

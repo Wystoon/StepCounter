@@ -18,6 +18,12 @@ public class CounterController(ICounterService counterService) : ControllerBase
 
         return Created(new Uri($"{Request.Scheme}://{Request.Host}/v1/counter/{counter.Id}"), counter);
     }
+    
+    [HttpGet("{counterId:guid}")]
+    [ProducesResponseType(typeof(Counter), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<Counter>> GetCounter([Required] Guid counterId)
+        => Ok(await counterService.GetCounterAsync(counterId));
 
     [HttpPut("{counterId:guid}")]
     [ProducesResponseType(typeof(Counter), StatusCodes.Status200OK)]

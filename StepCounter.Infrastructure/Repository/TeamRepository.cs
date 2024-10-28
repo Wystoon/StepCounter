@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using StepCounter.Core.Interface;
 using StepCounter.Core.Model.Team;
 using StepCounter.Infrastructure.PersistenceContext;
@@ -14,7 +15,7 @@ public class TeamRepository(AppDbContext context) : ITeamRepository
     }
 
     public async Task<Team?> GetTeamAsync(Guid teamId)
-        => await context.Teams.FindAsync(teamId);
+        => await context.Teams.AsNoTracking().FirstOrDefaultAsync(t => t.Id == teamId);
 
     public async Task<Team> UpdateTeamAsync(Team team)
     {

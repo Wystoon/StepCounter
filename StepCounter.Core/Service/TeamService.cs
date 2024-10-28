@@ -1,4 +1,5 @@
 using StepCounter.Core.Interface;
+using StepCounter.Core.Model.Counter.DTO;
 using StepCounter.Core.Model.Team;
 using StepCounter.Core.Model.Team.DTO;
 
@@ -19,6 +20,13 @@ public class TeamService(ITeamRepository repository, ICounterService counterServ
     public async Task<Team> UpdateTeamAsync(Guid teamId, UpdateTeamRequest request)
     {
         var existingTeam = await TryGetTeamAsync(teamId);
+        var newCounterIds = request.MembersCountersIds.Except(existingTeam.MembersCountersIds).ToList();
+        var counters = await Task.WhenAll(newCounterIds.Select(counterService.GetCounterAsync));
+
+        var totalSteps = counters.Sum(counter => counter.StepCount);
+
+        var teamCounter = await counterService.GetCounterAsync(existingTeam.TeamCounterId);
+        await counterService.UpdateCounterAsync(teamCounter.Id, new UpdateCounterRequest(totalSteps), false);
 
         var updatedTeam = await repository.UpdateTeamAsync(existingTeam with
         {

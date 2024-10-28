@@ -16,7 +16,7 @@ public class TeamController(ITeamService teamService) : ControllerBase
     {
         var team = await teamService.CreateTeamAsync();
 
-        return Created(new Uri($"team/{team.Id.ToString()}"), team);
+        return Created(new Uri($"{Request.Scheme}://{Request.Host}/v1/team/{team.Id.ToString()}"), team);
     }
 
     [HttpGet("{teamId:guid}")]
